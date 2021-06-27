@@ -1,0 +1,20 @@
+{
+	"name": "Existing Docker Compose (Extend)",
+    "dockerComposeFile": [
+		"../docker-compose.yml",
+		"../docker-compose.dev.yml"
+	],
+	"service": "backend",
+	"workspaceFolder": "/app",
+	"extensions": [
+		"eamodio.gitlens",
+		"esbenp.prettier-vscode",
+		"ms-vscode.vscode-typescript-tslint-plugin",
+    "ms-vscode.vscode-typescript-next",
+    "streetsidesoftware.code-spell-checker",
+		"stuart.unique-window-colors",
+	],
+	"settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+}

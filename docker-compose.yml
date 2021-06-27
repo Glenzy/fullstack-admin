@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+ backend:
+  build:
+   context: ./backend
+  ports:
+   - 8000:8000 # app port
+   - 9229:9229 # declaring this port so we can attach a debugger - nodemon YAY
+  environment:
+   - SERVER_PORT=8000
+   - CONNECTIONSTRING=mongodb://mongo:27017/db
+  volumes:
+   - ./:/app
+  command: npm run debug
+
+ mongo:
+  image: mongo:4.2.8
+  ports:
+   - 27017:27017
+  volumes:
+   - mongodb:/data/db
+   - mongodb_config:/data/configdb
+volumes:
+ mongodb:
+ mongodb_config:
