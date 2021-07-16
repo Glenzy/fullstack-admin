@@ -31,10 +31,6 @@ docker build -t app .
 - [ ] Basic frontend skeleton
 - [ ] E2E testing - Cypress
 - [ ] Demonstrate working end to end skeleton 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2b45eaf672f3dc85e88eaed1ba9faecd55a036fb
 
 ### End Game 
 The aim is to develop variants of an admin backend. Db must be able to handle concurrency and user access. For example 2 or more users updating the same records. It must also handle user access. The frontend is of secondary importance. 
