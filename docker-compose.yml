@@ -3,7 +3,8 @@ version: '3.8'
 services:
  backend:
   build:
-   context: ./backend
+   context: ./backend/
+   dockerfile: Dockerfile 
   ports:
    - 8000:8000 # app port
    - 9229:9229 # declaring this port so we can attach a debugger - nodemon YAY
@@ -21,6 +22,18 @@ services:
   volumes:
    - mongodb:/data/db
    - mongodb_config:/data/configdb
+ 
+ client:
+   image: client
+   volumes:
+      - ./client:/client
+      - client-node-modules:/node_modules
+   ports:
+      - 3005:3005
+   build:
+      context: ./client/
+      dockerfile: Dockerfile
 volumes:
  mongodb:
  mongodb_config:
+ client-node-modules:

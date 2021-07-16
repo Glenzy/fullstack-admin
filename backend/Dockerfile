@@ -7,7 +7,7 @@ FROM node:16.3-alpine3.11 as base
 # TODO set as environment var
 ENV NODE_ENV=development
 # This instructs Docker to use this path as the default location for all subsequent commands. 
-WORKDIR /app
+WORKDIR /app/backend/
 
 # Make node the owner
 RUN mkdir -p /app && chown -R node:node /app

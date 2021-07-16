@@ -21,6 +21,9 @@ services:
   volumes:
    - mongodb:/data/db
    - mongodb_config:/data/configdb
+ 
+ client:
+   - 13000:3000
 volumes:
  mongodb:
  mongodb_config:

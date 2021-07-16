@@ -2,29 +2,23 @@
 
 # inherits from node's own base image that includes all the tools and packages required 
 FROM node:16.3-alpine3.11 as base
-
-# RUN apk --no-cache add git
-# TODO set as environment var
-ENV NODE_ENV=production
+# TODO This Docker file allows app to run locally but we want to set the NODE_ENV correctly
+#ENV NODE_ENV=production
 # This instructs Docker to use this path as the default location for all subsequent commands. 
-WORKDIR /app/
+WORKDIR /app/client/
+COPY . ./
 
-# Make node the owner
-RUN mkdir -p /app && chown -R node:node /app
+RUN npm install
+RUN addgroup -S user
+# Create a user 'appuser' under 'xyzgroup'
+RUN adduser -S -D -h /app/client/ appuser user
 
-USER node
-# before running NPM install we need to get the package.json and package-lock.json into the image
-COPY package.json package.json
-COPY package-lock.json package-lock.json
-RUN npm ci
-COPY . .
-# set up tests to run before build
-FROM base as test
-# USER node
-CMD [ "npm", "run", "test" ]
+# Chown all the files to the app user.
+RUN chown -R appuser:user /app/client/
+# Switch to 'appuser'
+USER appuser
 
-#then we build it. 
-#FROM base as dev
-# USER node
+# Open the mapped port
+EXPOSE 3005
 # Telll docker what command we need to run 
-#CMD [ "node", "server.js" ]
+CMD [ "npm", "run", "dev" ]
